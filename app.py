@@ -59,7 +59,7 @@ if file is not None:
 
     if st.button("Визначити породу"):
         with st.spinner('Аналізуємо зображення...'):
-            img_processed = ImageOps.fit(image, (224, 224), Image.ANTIALIAS)
+            img_processed = ImageOps.fit(image, (224, 224), Image.LANCZOS)
             img_array = np.asarray(img_processed)
             img_array = (img_array.astype(np.float32) / 255.0)
             img_reshape = img_array[np.newaxis, ...]
@@ -77,4 +77,5 @@ if file is not None:
             top_3_indices = np.argsort(prediction[0])[-3:][::-1]
             for i in top_3_indices:
                 st.write(f"- {CLASS_NAMES[i]}: {prediction[0][i]*100:.2f}%")
+
 
